@@ -1,0 +1,67 @@
+body {
+    padding: 15px;
+    background-color: #f0f0f0;
+}
+
+.doc-square {
+    width: 300px;
+    height: 300px;
+    background-color: #FFCC80;
+    padding: 15px;
+    margin:15px;
+    float:left;
+    opacity: 0.8;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.doc-square.doc-version:hover {
+    cursor: default;
+}
+
+.doc-version h3 {
+    text-align: center;
+    font-size: 62px;
+    margin-bottom: 0;
+}
+
+.doc-version a {
+    display: block;
+    padding:7px;
+    max-width: 40%;
+    border-radius: 2px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.doc-version a:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/** basic bloc colors **/
+.doc-square.red {
+    background-color: #EF9A9A;
+}
+
+.doc-square.blue {
+    background-color: #80DEEA
+}
+
+.doc-square:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.doc-square h2 {
+    text-align: center;
+    font-size: 112px;
+    margin-bottom: 0;
+}
+
+.doc-square span {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+}
