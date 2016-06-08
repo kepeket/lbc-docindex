@@ -30,6 +30,9 @@ var path = {
 gulp.task('copy', function(){
     gulp.src(path.HTML)
     .pipe(gulp.dest(path.DEST));
+    gulp.src('src/jquery.1.12.1.min.js')
+    .pipe(gulp.dest(path.DEST));
+
 });
 
 
@@ -82,6 +85,9 @@ gulp.task('bundle', function(){
 
 /** PROD TASKS **/
 gulp.task('build', function(){
+    gulp.src('src/jquery-1.12.1.min.js')
+    .pipe(gulp.dest(path.DEST));
+
     browserify({
         entries: [path.ENTRY_POINT],
         transform: [reactify]
