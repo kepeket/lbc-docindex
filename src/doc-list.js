@@ -17,8 +17,9 @@ var DocList = React.createClass({
             $.each(this.props.data, function(idx, docs){
                 if (!$.isEmptyObject(docs)){
                     if (docs.hasOwnProperty('url')){
+                        console.log(docs);
                         docNodes.push(
-                            <DocVersion version={idx} name={docs.name} color="green" url={docs.url}  key={idx}></DocVersion>
+                            <DocVersion version={idx} name={docs.name} color={docs.color} url={docs.url}  key={idx}></DocVersion>
                         )
                     }
                     else {

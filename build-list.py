@@ -4,6 +4,7 @@ import argparse
 import re
 import pprint
 import json
+import hashlib
 
 from slugify import slugify
 
@@ -44,19 +45,26 @@ def recurse(path, idx, basejson):
     for d in dirs:
         if (idx == 0 and d in args.exclude):
             continue
+        md5 = hashlib.md5()
+        md5.update(d)
+        baseHex = md5.digest().encode("hex")
+        r = (int("0x"+baseHex[1:3], 16) + 255) / 2
+        v = (int("0x"+baseHex[3:5], 16) + 255) / 2
+        b = (int("0x"+baseHex[5:7], 16) + 255) / 2
         if dirtype == "children":
             json[slugify(d)] = {
                 "key": str(idx)+""+str(i),
                 "firstLetter": d[0:1].upper(),
                 "fullName": d,
-                "color": "red",
+                "color": "#"+str(hex(r)+hex(v)+hex(b)).replace('0x', ''),
 
             }
             recurse(os.path.join(path, d), idx+1, json[slugify(d)])
         else:
             json[slugify(d)] = {
                 "name": d,
-                "url": args.base_url+"/"+os.path.join(path, d)
+                "url": args.base_url+"/"+os.path.join(path, d),
+                "color": "#"+str(hex(r)+hex(v)+hex(b)).replace('0x', ''),
                 }
         i += 1
 

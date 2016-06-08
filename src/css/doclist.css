@@ -6,7 +6,7 @@ body {
 .doc-square {
     width: 300px;
     height: 300px;
-    background-color: #FFCC80;
+    background-color: #D0D0D0;
     padding: 15px;
     margin:15px;
     float:left;
@@ -38,15 +38,6 @@ body {
 
 .doc-version a:hover {
     background: rgba(0, 0, 0, 0.5);
-}
-
-/** basic bloc colors **/
-.doc-square.red {
-    background-color: #EF9A9A;
-}
-
-.doc-square.blue {
-    background-color: #80DEEA
 }
 
 .doc-square:hover {

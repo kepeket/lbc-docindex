@@ -9,8 +9,11 @@ var DocSquare = React.createClass({
     },
     render: function() {
         var boundClick = this.handleClick.bind(this, this.props.fullName);
+        var divStyle = {
+            backgroundColor: this.props.color
+        }
         return (
-            <div className={this.props.color + " doc-square"} onClick={boundClick}>
+            <div className="doc-square" style={divStyle} onClick={boundClick}>
                 <h2>{this.props.firstLetter}</h2>
                 <span>{this.props.fullName}</span>
             </div>
