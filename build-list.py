@@ -25,7 +25,7 @@ def listDirs(path):
     dirs = []
     retkey = "children"
     for item in os.listdir(path):
-        if os.path.isdir(os.path.join(path, item)):
+        if os.path.isdir(os.path.join(path, item)) and item[0:1] != ".":
             dirs.append(item)
             m = re.search('\d+\.\d+\.\d+', item)
             if item == "master" or m:
