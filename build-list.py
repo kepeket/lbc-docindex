@@ -14,6 +14,7 @@ parser.add_argument('--root-path',
                     default="."
 )
 parser.add_argument('--base-url', default="https://doc.bon-coin.net")
+parser.add_argument('--exclude', default=[], nargs='*')
 
 args = parser.parse_args();
 
@@ -41,6 +42,8 @@ def recurse(path, idx, basejson):
         json = basejson
     i = 0
     for d in dirs:
+        if (idx == 0 and d in args.exclude):
+            continue
         if dirtype == "children":
             json[slugify(d)] = {
                 "key": str(idx)+""+str(i),
