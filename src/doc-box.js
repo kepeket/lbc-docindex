@@ -10,17 +10,13 @@ var DocBox = React.createClass({
     baseUrl: "http://"+window.location.hostname+":"+window.location.port+"/test",
     getInitialState: function(){
        return {data: {}, path: '/'}
-    } ,
+    },
     componentDidMount: function(){
         hash = window.location.hash.substr(1);
         this.path = hash;
         setInterval(this.loadFolders(this.path), this.props.pollInterval);
         $(window).on('hashchange', function(){
             subfolder = window.location.hash.substr(1);
-            context.setState(function(previousState, currentProps) {
-                previousState['path'] = subfolder;
-              return previousState;
-            })
             context.path = subfolder;
             context.loadFolders(subfolder);
         });

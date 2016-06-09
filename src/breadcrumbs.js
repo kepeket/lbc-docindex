@@ -4,35 +4,42 @@
 var BreadcrumbsItem = require('./breadcrumbs-item');
 
 var Breadcrumbs = React.createClass({
+    items: [],
     getInitialState: function(){
         return {path: '/', items: []}
     },
-    recurse: function(path){
-        matches = path.match(/(.*)\/([a-zA-Z0-9\-]+)/);
-        if (matches.length > 2){
-            this.recurse(matches[2]);
+    recurse: function(path, lvl){
+        var matches = path.match(/(.*\/)?([a-zA-Z0-9\-]+)/);
+        if (matches !== null){
+            href = '#'+matches[0];
+            if (typeof(matches[1]) != "undefined"){
+                this.recurse(matches[1], lvl+1)
+            }
+            href = '#'+matches[0];
+            label = matches[2].replace(/\//g, '')
+            console.log(lvl, lvl==0)
+            this.items.push({
+                               id: matches[0],
+                               href: href,
+                               label: label,
+                               current: lvl==0
+                            });
         }
-        this.state.items.push({
-                               href: matches[1],
-                               label: matches[0]
-                                }
-                               );
-    },
-    componentDidMount: function(){
-        console.log(this.props)
-        this.state.path = this.props.path;
-        basePath = this.props.path;
     },
     render: function(){
-        var breadItems = this.state.items.map(function(b){
-            return (
-                <BreadcrumbsItem label={b.label} href={b.href} key={b.id}></BreadcrumbsItem>
-            )
+        this.items = [];
+        this.recurse(this.props.path, 0)
+        var breadItems = this.items.map(function(b){
+            if (b.label != '/'){
+                return (
+                    <BreadcrumbsItem item={b} key={b.id}></BreadcrumbsItem>
+                )
+            }
         });
         return (
             <div className="breadcrumbs">
-                <span>Path: {this.state.path}</span>
                 <ul>
+                    <li><span className="bread-label home"><a href="/#/"><i className="fa fa-home" aria-hidden="true"></i>Hoomie!</a></span></li>
                     {breadItems}
                 </ul>
             </div>

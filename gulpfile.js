@@ -32,6 +32,8 @@ gulp.task('copy', function(){
     .pipe(gulp.dest(path.DEST));
     gulp.src('src/jquery.1.12.1.min.js')
     .pipe(gulp.dest(path.DEST));
+    gulp.src('src/fonts/*')
+    .pipe(gulp.dest(path.DEST_SRC+'/fonts'));
 
 });
 
@@ -87,6 +89,8 @@ gulp.task('bundle', function(){
 gulp.task('build', function(){
     gulp.src('src/jquery-1.12.1.min.js')
     .pipe(gulp.dest(path.DEST));
+    gulp.src('src/fonts/*')
+    .pipe(gulp.dest(path.DEST_BUILD+'/fonts'));
 
     browserify({
         entries: [path.ENTRY_POINT],

@@ -11,7 +11,8 @@ body {
     padding: 15px;
     margin:15px;
     float:left;
-    opacity: 0.8;
+    opacity: 0.7;
+    transition: opacity 0.5s ease, box-shadow 0.3s ease;
 }
 
 .doc-square.doc-version:hover {
@@ -43,6 +44,9 @@ body {
 .doc-square:hover {
     opacity: 1;
     cursor: pointer;
+/*    margin:20px;
+    padding: 10px;*/
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
 }
 
 .doc-square h2 {
@@ -54,5 +58,50 @@ body {
 .doc-square span {
     display: block;
     text-align: center;
-    font-size: 14px;
+    font-size: 24px;
+}
+
+.bread-label {
+    padding: 3px 7px;
+    border-radius: 2px;
+    margin: 0px 4px;
+}
+
+.bread-label.home i {
+    font-size: 19px;
+    margin-right: 8px;
+    vertical-align: top;
+}
+
+.bread-label a {
+    color: #f56b2a;
+    text-decoration: underline;
+}
+
+.bread-label:hover {
+    background: #f56b2a;
+}
+
+.bread-label.current:hover {
+    background: none;
+}
+
+
+.bread-label:hover a {
+       color: #fff;
+}
+
+.breadcrumbs ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+
+.breadcrumbs ul li:after {
+    content: ">";
+    color: #f56b2a;
+}
+
+.breadcrumbs ul li:last-child:after {
+    content: "";
 }
