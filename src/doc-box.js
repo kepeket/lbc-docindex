@@ -9,7 +9,7 @@ var DocBox = React.createClass({
     path: '/',
     baseUrl: "http://"+window.location.hostname+":"+window.location.port+"/test",
     getInitialState: function(){
-       return {data: {}}
+       return {data: {}, path: '/'}
     } ,
     componentDidMount: function(){
         hash = window.location.hash.substr(1);
@@ -17,6 +17,10 @@ var DocBox = React.createClass({
         setInterval(this.loadFolders(this.path), this.props.pollInterval);
         $(window).on('hashchange', function(){
             subfolder = window.location.hash.substr(1);
+            context.setState(function(previousState, currentProps) {
+                previousState['path'] = subfolder;
+              return previousState;
+            })
             context.path = subfolder;
             context.loadFolders(subfolder);
         });
@@ -57,7 +61,7 @@ var DocBox = React.createClass({
             cache: false,
             success: function(data) {
                 data = context.recurse(data, context.path);
-                this.setState({data: data});
+                this.setState({data: data, path: context.path});
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -67,8 +71,7 @@ var DocBox = React.createClass({
     render: function() {
         return (
             <div className="doc-box">
-                <h1>Doc Folders</h1>
-                <Breadcrumbs />
+                <Breadcrumbs path={this.state.path}/>
                 <DocList data={this.state.data} />
             </div>
         )

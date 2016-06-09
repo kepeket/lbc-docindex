@@ -121,6 +121,6 @@ gulp.task('demo', function(){
 });
 
 // Just running the two tasks
-gulp.task('default', ['watch']);
+gulp.task('default', ['copy', 'watch']);
 
 gulp.task('prod', ['replaceHTML', 'build']);
