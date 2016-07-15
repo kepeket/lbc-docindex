@@ -7,8 +7,12 @@ var DocVersion = React.createClass({
     	var divStyle = {
             backgroundColor: this.props.color
         }
+        var additionalClass = '';
+        if (this.props.version != 'master'){
+            additionalClass = 'tag';
+        }
         return (
-            <div className="doc-square doc-version" style={divStyle} >
+            <div className={"doc-square doc-version " + additionalClass} style={divStyle} >
                 <h3>{this.props.name}</h3>
                 <a href={this.props.url}>browse</a>
             </div>

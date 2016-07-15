@@ -11,6 +11,8 @@ var watchify = require('watchify');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var streamify = require('streamify');
+
+var scp = require('gulp-scp2');
  
 var path = {
   HTML: 'src/index.html',
@@ -118,6 +120,21 @@ gulp.task('replaceHTML', function(){
 });
 /** - END PROD TASKS **/
 
+gulp.task('deploy-scp', function() {
+    gulp.start('prod');
+  return gulp.src([path.DEST_BUILD, path.DEST+'/index.html', path.DEST+'/jquery*'])
+  .pipe(buffer())
+  .pipe(scp({
+    host: 'pdci01.leboncoin.lan',
+    username: 'kprettre',
+    dest: '/srv/doc',
+    agent: process.env["SSH_AUTH_SOCK"],
+    agentForward: true  
+  }))
+  .on('error', function(err) {
+    console.log(err);
+  });
+});
 
 gulp.task('demo', function(){
     gulp.src('list.json')

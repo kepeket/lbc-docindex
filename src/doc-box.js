@@ -2,7 +2,9 @@
  * Created by kevin on 07/03/16. 
  */
 
-var Breadcrumbs = require('./breadcrumbs')
+var slugify = require('slugify');
+
+var Breadcrumbs = require('./breadcrumbs');
 var DocList = require('./doc-list');
 
 var DocBox = React.createClass({
@@ -18,13 +20,13 @@ var DocBox = React.createClass({
         $(window).on('hashchange', function(){
             subfolder = window.location.hash.substr(1);
             context.path = subfolder;
-            context.loadFolders(subfolder);
+            context.loadFolders();
         });
         context = this;
     },
     sanitizePath: function(subfolder){
         var ret = subfolder.replace(/\//g, '');
-        return ret;
+        return slugify(ret.toLowerCase());
     },
     recurse: function(data, path){
         if (!path || path == '/'){
@@ -32,6 +34,7 @@ var DocBox = React.createClass({
         }
         part = path.match(/\/?([a-zA-Z\-0-9]+)(.*)/)
         path = this.sanitizePath(part[1]);
+        console.log(path);
         if (path && data.hasOwnProperty(path)){
             if (data[path].hasOwnProperty('children')){
                 data = this.recurse(data[path].children, part[2]);
@@ -50,7 +53,7 @@ var DocBox = React.createClass({
         }
         return data;
     },
-    loadFolders: function(subfolder) {
+    loadFolders: function() {
         $.ajax({
             url: "/list.json",
             dataType: 'json',

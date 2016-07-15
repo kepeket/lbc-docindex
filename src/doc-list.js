@@ -17,10 +17,16 @@ var DocList = React.createClass({
             $.each(this.props.data, function(idx, docs){
                 if (!$.isEmptyObject(docs)){
                     if (docs.hasOwnProperty('url')){
-                        console.log(docs);
-                        docNodes.push(
-                            <DocVersion version={idx} name={docs.name} color={docs.color} url={docs.url}  key={idx}></DocVersion>
-                        )
+                        if (idx == 'master'){
+                            docNodes.unshift(
+                                <DocVersion version={idx} name={docs.name} color={docs.color} url={docs.url}  key={idx}></DocVersion>
+                            )
+                        }
+                        else {
+                            docNodes.push(
+                                <DocVersion version={idx} name={docs.name} color={docs.color} url={docs.url}  key={idx}></DocVersion>
+                            )
+                        }
                     }
                     else {
                         docNodes.push(
