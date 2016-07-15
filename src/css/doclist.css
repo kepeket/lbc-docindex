@@ -146,6 +146,7 @@ body {
 
 #frame.open {
     width: 75%;
+    overflow: visible;
 }
 
 #index.open {
