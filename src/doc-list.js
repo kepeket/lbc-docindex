@@ -14,8 +14,18 @@ var DocList = React.createClass({
         }
         else {
             var docNodes = []
-            $.each(this.props.data, function(idx, docs){
-                if (!$.isEmptyObject(docs)){
+            /** ugly check **/
+            test = Object.keys(this.props.data)[0];
+            if (this.props.data[test].hasOwnProperty('url')){
+                keys = Object.keys(this.props.data).sort().reverse();
+            }
+            else {
+                keys = Object.keys(this.props.data).sort();                
+            }
+            var context = this;
+            $.each(keys, function(_, idx){
+                if (!$.isEmptyObject(context.props.data[idx])){
+                    docs = context.props.data[idx];
                     if (docs.hasOwnProperty('url')){
                         if (idx == 'master'){
                             docNodes.unshift(

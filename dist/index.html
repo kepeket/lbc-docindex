@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>LBC Tech doc</title>
-    <!-- build:css -->
-    <link href="src/css/doclist.css" rel="stylesheet" media="all" />
-    <link href="src/css/font-awesome.css" rel="stylesheet" media="all" />
-    <!-- endbuild -->
+    <link rel="stylesheet" href="build/css/main.css">
     <!--<link href='https://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>-->
 </head>
 <body>
 <div id="index"></div>
+<div id="frame">
+	<div class="exit-bar">
+		<a href="javascript:void(0)" id="new-window" target="_blank">Open in a separate window <i class="fa fa-external-link"></i></a>
+		<a href="javascript:void(0)" id="close-panel">Close <i class="fa fa-times-circle-o"></i></a>
+	</div>
+	<iframe id="docframe" src="" data-src="" class="doc-frame"></iframe>
+</div>
 <script src="https://fb.me/react-15.1.0.js"></script>
 <script src="https://fb.me/react-dom-15.1.0.js"></script>
 <script src="jquery-1.12.1.min.js"></script>
-<!-- build:js -->
-<script src="src/bundle.js"></script>
-<!-- endbuild -->
+<script src="build/build.min.js"></script>
 </body>
 </html>
