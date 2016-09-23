@@ -22,11 +22,14 @@ args = parser.parse_args()
 doclist = {}
 
 
-def listDirs(path):
+def listDirs(path, idx):
     dirs = []
     retkey = "children"
     for item in os.listdir(path):
-        if os.path.isdir(os.path.join(path, item)) and item[0:1] != ".":
+        if idx == 0 and item in args.exclude:
+            continue
+        if not (idx == 0 and item in args.exclude) and \
+            os.path.isdir(os.path.join(path, item)) and item[0:1] != ".":
             dirs.append(item)
             m = re.search('\d+\.\d+\.\d+', item)
             if item == "master" or m:
@@ -35,7 +38,7 @@ def listDirs(path):
 
 
 def recurse(path, idx, basejson):
-    dirtype, dirs = listDirs(path)
+    dirtype, dirs = listDirs(path, idx)
 
     if idx != 0:
         basejson[dirtype] = {}
@@ -44,8 +47,6 @@ def recurse(path, idx, basejson):
         json = basejson
     i = 0
     for d in dirs:
-        if (idx == 0 and d in args.exclude):
-            continue
         md5 = hashlib.md5()
         md5.update(d)
         baseHex = md5.digest().encode("hex")
