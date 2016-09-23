@@ -32,7 +32,9 @@ def listDirs(path, idx):
             os.path.isdir(os.path.join(path, item)) and item[0:1] != ".":
             dirs.append(item)
             m = re.search('\d+\.\d+\.\d+', item)
-            if item == "master" or m:
+            """ checking if subfolder contains index.html """
+            exists = os.path.exists(os.path.join(path, item, 'index.html'))
+            if item == "master" or m or exists is True:
                 retkey = "versions"
     return retkey, dirs
 
