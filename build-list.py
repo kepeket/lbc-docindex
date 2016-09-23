@@ -63,9 +63,10 @@ def recurse(path, idx, basejson):
             }
             recurse(os.path.join(path, d), idx+1, json[slugify(d)])
         else:
+            url = args.base_url + re.sub(args.root_path, '', os.path.join(path, d))
             json[slugify(d)] = {
                 "name": d,
-                "url": args.base_url+"/"+os.path.join(path, d),
+                "url": url,
                 "color": "#"+str(hex(r)+hex(v)+hex(b)).replace('0x', ''),
                 }
         i += 1
