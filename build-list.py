@@ -17,7 +17,7 @@ parser.add_argument('--root-path',
 parser.add_argument('--base-url', default="https://doc.bon-coin.net")
 parser.add_argument('--exclude', default=[], nargs='*')
 
-args = parser.parse_args();
+args = parser.parse_args()
 
 doclist = {}
 
@@ -31,7 +31,8 @@ def listDirs(path):
             m = re.search('\d+\.\d+\.\d+', item)
             if item == "master" or m:
                 retkey = "versions"
-    return (retkey, dirs)
+    return retkey, dirs
+
 
 def recurse(path, idx, basejson):
     dirtype, dirs = listDirs(path)
