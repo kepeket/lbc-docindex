@@ -15,6 +15,9 @@ ReactDOM.render(
 $(document).ready(function(){
 	$('#index').on('click', '.doc-version a', function(e){
 		e.preventDefault();
+        $('html, body').animate({
+            scrollTop: 0
+        }, 500);
 		newSrc = $(e.target).attr('href');
 		$(e.target).closest('.doc-version').siblings().removeClass('active');
 		$(e.target).closest('.doc-version').addClass('active');

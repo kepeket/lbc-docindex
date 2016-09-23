@@ -5,6 +5,9 @@
 var DocSquare = React.createClass({
     handleClick: function(path){
         window.location.hash = window.location.hash + path +"/";
+        $('html, body').animate({
+            scrollTop: 0
+        }, 500);
 
     },
     render: function() {
