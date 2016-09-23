@@ -3,10 +3,12 @@
   */
 
 var DocBox = require('./doc-box');
+var ToolBox = require('./tool-box');
 
 ReactDOM.render(
     <div className="main">
         <h1>LBC Tech doc</h1>
+        <ToolBox />
         <DocBox pollInterval={20000}/>
     </div>,
     document.getElementById('index')
@@ -25,8 +27,17 @@ $(document).ready(function(){
 		$('#frame iframe').attr('src', $(e.target).attr('href'));
 		$('#frame iframe').on('load', function(e){
 			$('#index, #frame').addClass('open');
-			iframebody = e.target.contentWindow.document.body;
-			$('#frame').height(($(iframebody).find('.rst-content').height()+100)+'px');
+		        iframebody = e.target.contentWindow.document.body;
+                    h = $(iframebody).find('.rst-content').height()+100;
+                    // albater theme support
+                    if (h == 100){
+                        h = $(iframebody).find('.document').height()+100;
+                    }
+                    // jsdoc support
+                    if (h == 100){
+                        h = $(iframebody).find('#main').height()+100;
+                    }
+			$('#frame').height(h+'px');
 			$('#new-window').attr('href', e.target.contentWindow.location.href);
 		});
 	});
